@@ -1,0 +1,64 @@
+{
+ "voz": "alex",
+ "musica": true,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "texto": "¿Sigues causando compras A MANO en CONTAI?",
+   "resaltar": [
+    "A MANO"
+   ],
+   "voz": "¿Sigues causando tus compras a mano en Contai? Mira esto."
+  },
+  {
+   "tipo": "lista",
+   "titulo": "Lo de siempre",
+   "icono": "x",
+   "items": [
+    "Factura por factura",
+    "Errores de digitación",
+    "Horas al cierre de mes"
+   ],
+   "voz": "Factura por factura, errores de digitación y horas perdidas en cada cierre."
+  },
+  {
+   "tipo": "proceso",
+   "titulo": "Así lo automatizamos",
+   "pasos": [
+    "Matriz de facturas DIAN",
+    "FC CONTAI la procesa",
+    "Plano listo para importar"
+   ],
+   "voz": "Tomamos la matriz de facturas de la Dian, efe ce Contai la procesa y te entrega el plano listo para importar."
+  },
+  {
+   "tipo": "pantalla",
+   "titulo": "Tu plano, fila por fila",
+   "app": "FC CONTAI · Plano de compras",
+   "filas": 6,
+   "listo": "Plano listo para CONTAI",
+   "voz": "Cada factura queda en su fila, lista para causar."
+  },
+  {
+   "tipo": "antes_despues",
+   "antes": "Digitar cada factura",
+   "despues": "Importar, revisar y validar",
+   "voz": "Antes digitabas todo. Ahora importas, revisas y validas."
+  },
+  {
+   "tipo": "frase",
+   "lineas": [
+    "La herramienta digita.",
+    "Tú pones el criterio."
+   ],
+   "grande": true,
+   "voz": "La herramienta digita. El criterio sigue siendo tuyo."
+  },
+  {
+   "tipo": "cierre",
+   "texto": "Somos ASAR",
+   "cta": "Escríbenos por DM",
+   "voz": "¿Quieres verlo con tus facturas? Escríbenos por mensaje directo. Somos Asar."
+  }
+ ]
+}

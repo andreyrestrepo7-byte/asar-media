@@ -1,130 +1,140 @@
-"""Plantilla de Reels narrados de Somos ASAR (1080x1920, MP4 H.264 + voz).
+"""Motor de Reels dinámicos de Somos ASAR (1080x1920, MP4 H.264 + narración + música).
 
-Uso:  python3 herramientas/reel.py reel.json carpeta_salida
-reel.json = {"voz": "hombre" | "mujer" | "ninguna", "rapidez": 0.88 (menor = habla más rápido), "segundos": 3.2, "escenas": [
-  {"tipo": "gancho", "titulo": "...", "sub": "...", "voz": "Lo que dice el narrador en esta escena"},
-  {"tipo": "punto", "num": "01", "titulo": "...", "texto": "...", "voz": "..."},
-  {"tipo": "cierre", "titulo": "...", "texto": "...", "cta": "Escríbenos por DM", "voz": "..."}
-]}
-Las escenas se alternan: blanca, morada, blanca, morada... y el cierre siempre es morado.
-Cada escena dura lo que tarde su narración (mínimo "segundos").
-Genera escena-N.jpg, portada.jpg, narracion.wav, reel.mp4 y guion.json.
-Requiere playwright, Chrome, ffmpeg y piper-tts (se instala solo si falta). Las voces se descargan
-la primera vez desde GitHub (modelos piper de sherpa-onnx).
+Uso:  python3 herramientas/reel.py reel.json carpeta_salida [--borrador]
+--borrador genera a 15 fps para revisar rápido; sin él, 30 fps final.
+
+reel.json = {"voz": "alex" | "dora" | "santa" | "ninguna", "musica": true, "escenas": [ ... ]}
+Tipos de escena (todas aceptan "voz": la frase que dice el narrador, que también sale como subtítulo animado):
+  gancho        {"texto", "resaltar": ["palabras resaltadas"], "sub"}          palabras que entran una a una con golpe
+  lista         {"titulo", "items": [...3-4], "icono": "x" | "check"}           ítems que entran deslizando con ✕ o ✓
+  proceso       {"titulo", "pasos": [...3]}                                     pasos numerados que se encadenan con flechas
+  pantalla      {"titulo", "app", "filas": 6, "listo"}                          ventana de app que se llena fila por fila
+  antes_despues {"antes", "despues"}                                            pantalla dividida que cambia de antes a después
+  dato          {"numero", "sufijo", "texto"}                                   número grande que cuenta (solo datos reales)
+  frase         {"lineas": [...2-3], "grande": true}                            frase que aparece línea por línea
+  cierre        {"texto": "Somos ASAR", "cta": "Escríbenos por DM"}             logo que se dibuja y llamado a la acción
+Las escenas alternan fondo claro y morado; entre escenas hay un barrido. Cada escena dura lo que dura su narración.
+Requiere playwright, Chrome, ffmpeg, numpy y kokoro-onnx (se instala solo; el modelo se descarga de GitHub la primera vez).
 """
-import asyncio, html, json, os, shutil, subprocess, sys, wave
+import asyncio, json, os, subprocess, sys, wave
+import numpy as np
 from playwright.async_api import async_playwright
 
-PRI, INK, MUT, BG, BD = "#6D28D9", "#17151F", "#6B6779", "#FAFAFC", "#ECE9F3"
-VOCES = {"hombre": "es_MX-claude-high", "mujer": "es_AR-daniela-high"}
-CACHE = os.path.expanduser("~/.cache/asar-voz")
-e = lambda s: html.escape(str(s or "")).replace("\n", "<br>")
+AQUI = os.path.dirname(os.path.abspath(__file__))
+CACHE = os.path.expanduser("~/.cache/asar-voz/kokoro")
+VOCES = {"alex": "em_alex", "dora": "ef_dora", "santa": "em_santa", "hombre": "em_alex", "mujer": "ef_dora"}
+SR = 24000
 
-def morada(s, i):
-    return s.get("tipo") == "cierre" or (s.get("tipo") == "punto" and i % 2 == 0)
+def kokoro():
+    os.makedirs(CACHE, exist_ok=True)
+    for f in ("kokoro-v1.0.onnx", "voices-v1.0.bin"):
+        p = os.path.join(CACHE, f)
+        if not os.path.exists(p):
+            subprocess.run(["curl", "-sL", "-m", "600", "-o", p,
+                            f"https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/{f}"], check=True)
+    try:
+        from kokoro_onnx import Kokoro
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--break-system-packages", "kokoro-onnx"], check=True)
+        from kokoro_onnx import Kokoro
+    return Kokoro(os.path.join(CACHE, "kokoro-v1.0.onnx"), os.path.join(CACHE, "voices-v1.0.bin"))
 
-def marco(cuerpo, oscuro):
-    fondo, tinta, borde, mut = (PRI, "#FFFFFF", "#FFFFFF", "rgba(255,255,255,.8)") if oscuro else (BG, INK, PRI, MUT)
-    return f"""<html><head><style>*{{box-sizing:border-box;margin:0}}
-body{{width:1080px;height:1920px;background:{fondo};font-family:Inter;color:{tinta};display:flex;flex-direction:column;padding:200px 90px 400px}}
-.box{{align-self:flex-start;border:4px solid {borde};color:{borde};font-weight:600;font-size:38px;letter-spacing:.2em;padding:12px 12px 12px 22px;border-radius:12px}}
-.main{{flex:1;display:flex;flex-direction:column;justify-content:center}}
-.foot{{font-size:34px;color:{mut};font-weight:500}}</style></head><body>
-<span class="box">A.S.A.R.</span><div class="main">{cuerpo}</div><div class="foot">Somos ASAR · Automatización contable</div></body></html>"""
+def narrar(esc, voz, rapidez):
+    if voz == "ninguna" or not any(s.get("voz") for s in esc):
+        return [None] * len(esc)
+    k = kokoro(); v = VOCES.get(voz, "em_alex"); out = []
+    for s in esc:
+        t = (s.get("voz") or "").strip()
+        if not t: out.append(None); continue
+        a, sr = k.create(t, voice=v, speed=rapidez, lang="es")
+        if sr != SR:
+            a = np.interp(np.linspace(0, len(a), int(len(a) * SR / sr), endpoint=False), np.arange(len(a)), a)
+        out.append(np.asarray(a, dtype=np.float32))
+    return out
 
-def escena(s, i):
-    t, osc = s.get("tipo", "punto"), morada(s, i)
-    if t == "gancho":
-        return marco(f"""<div style="font-size:112px;font-weight:600;line-height:1.04;letter-spacing:-.02em">{e(s.get('titulo'))}</div>
-<div style="font-size:48px;color:{MUT};margin-top:48px;line-height:1.35">{e(s.get('sub'))}</div>""", False)
-    if t == "cierre":
-        return marco(f"""<div style="font-size:100px;font-weight:600;line-height:1.06;letter-spacing:-.02em">{e(s.get('titulo'))}</div>
-<div style="font-size:48px;margin-top:44px;line-height:1.4;opacity:.92">{e(s.get('texto'))}</div>
-<div style="margin-top:72px"><span style="border:4px solid #fff;font-size:42px;font-weight:600;padding:22px 36px;border-radius:14px">{e(s.get('cta') or 'Escríbenos por DM')}</span></div>""", True)
-    num_c, txt_c = ("#DDD6FE", "rgba(255,255,255,.92)") if osc else (PRI, "#2E2B38")
-    return marco(f"""<div style="font-size:150px;font-weight:600;color:{num_c};line-height:1">{e(s.get('num'))}</div>
-<div style="font-size:84px;font-weight:600;line-height:1.08;margin-top:36px;letter-spacing:-.01em">{e(s.get('titulo'))}</div>
-<div style="font-size:50px;line-height:1.42;margin-top:40px;color:{txt_c}">{e(s.get('texto'))}</div>""", osc)
+def tiempos_palabras(texto, dur):
+    ws = texto.split(); pesos = [len(w) + 2 for w in ws]; tot = sum(pesos) or 1; acc = 0; res = []
+    for w, p in zip(ws, pesos):
+        a = acc / tot * dur; acc += p; res.append({"w": w, "a": a, "b": acc / tot * dur})
+    return res
 
-async def render(esc, out):
+def musica(total, cortes):
+    n = int(total * SR); t = np.arange(n) / SR; m = np.zeros(n, np.float32); bpm = 104; beat = 60 / bpm
+    acordes = [[261.6, 329.6, 392.0, 493.9], [220.0, 261.6, 329.6, 392.0], [174.6, 220.0, 261.6, 329.6], [196.0, 246.9, 293.7, 392.0]]
+    for b in range(int(total / beat) + 1):
+        i0 = int(b * beat * SR)
+        if i0 >= n: break
+        L = min(int(.35 * SR), n - i0); tt = np.arange(L) / SR
+        m[i0:i0 + L] += (np.sin(2 * np.pi * 55 * tt * (1 + 2 * np.exp(-tt * 30))) * np.exp(-tt * 9) * .55).astype(np.float32)
+        h0 = int((b + .5) * beat * SR)
+        if h0 < n:
+            Lh = min(int(.06 * SR), n - h0); nz = np.random.default_rng(b).standard_normal(Lh)
+            m[h0:h0 + Lh] += (np.diff(nz, prepend=0) * np.exp(-np.arange(Lh) / SR * 70) * .08).astype(np.float32)
+    bar = beat * 4
+    for c in range(int(total / bar) + 1):
+        i0 = int(c * bar * SR); L = min(int(bar * SR), n - i0)
+        if L <= 0: break
+        tt = np.arange(L) / SR; env = np.minimum(1, tt / .3) * np.minimum(1, (bar - tt) / .3)
+        for f in acordes[c % 4]:
+            m[i0:i0 + L] += (np.sin(2 * np.pi * f * tt) * .045 * env).astype(np.float32)
+    for c in cortes:
+        i0 = int(max(0, c - .25) * SR); L = min(int(.5 * SR), n - i0)
+        if L <= 0: continue
+        nz = np.random.default_rng(int(c * 100)).standard_normal(L); env = np.sin(np.linspace(0, np.pi, L)) ** 2
+        m[i0:i0 + L] += (np.convolve(nz, np.ones(12) / 12, "same") * env * .18).astype(np.float32)
+    fade = int(1.2 * SR); m[-fade:] *= np.linspace(1, 0, fade)
+    return m
+
+async def video(data, out, fps):
+    total = data["_total"]; frames = int(total * fps)
+    ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", str(fps), "-c:v", "mjpeg",
+                           "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
+                           os.path.join(out, "_video.mp4")], stdin=subprocess.PIPE)
     async with async_playwright() as p:
         b = await p.chromium.launch(executable_path="/usr/bin/google-chrome")
         pg = await b.new_page(viewport={"width": 1080, "height": 1920})
-        for i, s in enumerate(esc, 1):
-            await pg.set_content(escena(s, i)); await pg.wait_for_timeout(250)
-            await pg.screenshot(path=os.path.join(out, f"escena-{i}.jpg"), type="jpeg", quality=92)
+        await pg.goto("file://" + os.path.join(AQUI, "reel_motor", "escena.html"))
+        await pg.evaluate("d=>init(d)", data)
+        await pg.wait_for_timeout(400)
+        for f in range(frames):
+            t = f / fps
+            await pg.evaluate(f"render({t:.4f})")
+            ff.stdin.write(await pg.screenshot(type="jpeg", quality=90))
+            if abs(t - data["escenas"][0]["_d"] * .6) < .5 / fps:
+                await pg.screenshot(path=os.path.join(out, "portada.jpg"), type="jpeg", quality=92)
         await b.close()
+    ff.stdin.close(); ff.wait()
 
-def modelo(voz):
-    name = VOCES[voz]; d = os.path.join(CACHE, f"vits-piper-{name}"); onnx = os.path.join(d, f"{name}.onnx")
-    if not os.path.exists(onnx):
-        os.makedirs(CACHE, exist_ok=True); tar = os.path.join(CACHE, "v.tar.bz2")
-        subprocess.run(["curl", "-sL", "-m", "300", "-o", tar,
-                        f"https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-{name}.tar.bz2"], check=True)
-        subprocess.run(["tar", "xjf", tar, "-C", CACHE], check=True); os.remove(tar)
-    try:
-        import piper  # noqa: F401
-    except ImportError:
-        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--break-system-packages", "piper-tts"], check=True)
-    return onnx
-
-def dur(wav):
-    with wave.open(wav) as w: return w.getnframes() / w.getframerate()
-
-def narrar(esc, out, voz, rapidez=0.88):
-    if voz == "ninguna" or not any(s.get("voz") for s in esc): return [None] * len(esc)
-    onnx = modelo(voz); res = []
-    for i, s in enumerate(esc, 1):
-        txt = (s.get("voz") or "").strip()
-        if not txt: res.append(None); continue
-        f = os.path.join(out, f"voz-{i}.wav")
-        subprocess.run([sys.executable, "-m", "piper", "-m", onnx, "--length-scale", str(rapidez), "-f", f], input=txt.encode("utf-8"), check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        res.append(f)
-    return res
-
-def video(n, out, durs, voces, fps=30, fade=0.45):
-    total = sum(durs) + fade
-    args = ["ffmpeg", "-y", "-loglevel", "error"]
-    for i in range(n):
-        args += ["-loop", "1", "-t", f"{durs[i] + fade:.2f}", "-i", os.path.join(out, f"escena-{i + 1}.jpg")]
-    vin = [(i, v) for i, v in enumerate(voces) if v]
-    for _, v in vin: args += ["-i", v]
-    args += ["-f", "lavfi", "-t", f"{total:.2f}", "-i", "anullsrc=r=22050:cl=mono"]
-    f = []
-    for i in range(n):
-        fr = int((durs[i] + fade) * fps)
-        f.append(f"[{i}:v]scale=2160:3840,zoompan=z='min(zoom+0.0003,1.03)':d={fr}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps={fps},setsar=1,format=yuv420p[v{i}]")
-    prev, off = "v0", 0.0
-    for i in range(1, n):
-        off += durs[i - 1]
-        f.append(f"[{prev}][v{i}]xfade=transition=smoothleft:duration={fade}:offset={off:.2f}[x{i}]"); prev = f"x{i}"
-    starts, acc = [], 0.0
-    for i in range(n): starts.append(acc + (fade if i else 0) + 0.15); acc += durs[i]
-    alabels = []
-    for k, (i, _) in enumerate(vin):
-        ms = int(starts[i] * 1000)
-        f.append(f"[{n + k}:a]aresample=22050,adelay={ms}|{ms}[a{k}]"); alabels.append(f"[a{k}]")
-    sil = n + len(vin)
-    f.append(f"[{sil}:a]{''.join(alabels)}amix=inputs={len(alabels) + 1}:normalize=0:duration=first,volume=1.4[aout]")
-    args += ["-filter_complex", ";".join(f), "-map", f"[{prev}]", "-map", "[aout]", "-c:v", "libx264", "-preset", "veryfast",
-             "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-ar", "44100", "-t", f"{total:.2f}",
-             "-movflags", "+faststart", os.path.join(out, "reel.mp4")]
-    subprocess.run(args, check=True)
-
-def main(src, out):
-    data = json.load(open(src, encoding="utf-8")); esc = data["escenas"]; seg = float(data.get("segundos", 3.2))
-    voz = data.get("voz", "hombre")
+def main(src, out, borrador=False):
+    data = json.load(open(src, encoding="utf-8")); esc = data["escenas"]
     os.makedirs(out, exist_ok=True)
-    asyncio.run(render(esc, out))
-    voces = narrar(esc, out, voz, float(data.get("rapidez", 0.88)))
-    durs = [max(seg, (dur(v) + 0.35) if v else 0) for v in voces]
-    video(len(esc), out, durs, voces)
-    for v in voces:
-        if v: os.remove(v)
-    shutil.copy(os.path.join(out, "escena-1.jpg"), os.path.join(out, "portada.jpg"))
-    json.dump(data, open(os.path.join(out, "guion.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(os.path.join(out, "reel.mp4"), f"{sum(durs):.1f} s")
+    voces = narrar(esc, data.get("voz", "alex"), float(data.get("rapidez", 1.05)))
+    V0 = .25
+    for s, v in zip(esc, voces):
+        vd = len(v) / SR if v is not None else 0
+        base = {"gancho": 2.6, "cierre": 3.2}.get(s.get("tipo"), 3.0)
+        s["_d"] = round(max(base, V0 + vd + .45), 3); s["_v0"] = V0
+        s["_words"] = tiempos_palabras(s.get("voz", ""), vd) if vd else []
+    data["_total"] = sum(s["_d"] for s in esc)
+    asyncio.run(video(data, out, 15 if borrador else 30))
+    n = int(data["_total"] * SR); voz = np.zeros(n, np.float32); acc = 0; cortes = []
+    for s, v in zip(esc, voces):
+        if v is not None:
+            i0 = int((acc + V0) * SR); L = min(len(v), n - i0); voz[i0:i0 + L] += v[:L]
+        acc += s["_d"]; cortes.append(acc)
+    mix = voz * 1.0 + (musica(data["_total"], cortes[:-1]) * (0.55 if data.get("musica", True) else 0))
+    mix = np.clip(mix / max(1e-6, np.abs(mix).max()) * .92, -1, 1)
+    wav = os.path.join(out, "_audio.wav")
+    with wave.open(wav, "w") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", os.path.join(out, "_video.mp4"), "-i", wav, "-c:v", "copy",
+                    "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-shortest", "-movflags", "+faststart",
+                    os.path.join(out, "reel.mp4")], check=True)
+    os.remove(wav); os.remove(os.path.join(out, "_video.mp4"))
+    limpio = {k: v for k, v in data.items() if not k.startswith("_")}
+    limpio["escenas"] = [{k: v for k, v in s.items() if not k.startswith("_")} for s in esc]
+    json.dump(limpio, open(os.path.join(out, "guion.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(os.path.join(out, "reel.mp4"), f"{data['_total']:.1f} s")
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], "--borrador" in sys.argv)
