@@ -1,0 +1,48 @@
+{
+ "voz": "hombre",
+ "segundos": 3.2,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "titulo": "Causa tus compras en CONTAI sin digitar",
+   "sub": "FC CONTAI, un desarrollo propio, en 30 segundos.",
+   "voz": "¿Todavía causas tus compras en Contai una por una? Mira cómo lo automatizamos."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "El problema",
+   "texto": "Causar cada factura de compra a mano en CONTAI, una por una, toma tiempo y abre la puerta a errores.",
+   "voz": "Hacerlo a mano toma tiempo, y cada dato digitado es un posible error."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "El punto de partida",
+   "texto": "La matriz de facturas electrónicas de la DIAN que arma ARCHIVO MATRIX a partir de los XML.",
+   "voz": "Partimos de la matriz que arma Archivo Matrix con los XML de la Dian."
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "Lo que hace",
+   "texto": "FC CONTAI toma esa matriz y genera el plano de importación para causar las compras en CONTAI.",
+   "voz": "Efe ce Contai la convierte en el plano de importación para causar las compras."
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "El resultado",
+   "texto": "Importas el plano en CONTAI. Tú revisas y validas; la herramienta hace la digitación.",
+   "voz": "Importas, revisas y validas. La herramienta digita; el criterio es tuyo."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "¿Todavía causas tus compras a mano?",
+   "texto": "Cuéntanos cómo lo haces hoy y te mostramos cómo lo trabajamos.",
+   "cta": "Escríbenos por DM",
+   "voz": "Escríbenos por mensaje directo y te mostramos cómo lo trabajamos. Somos Asar."
+  }
+ ],
+ "sub": null
+}

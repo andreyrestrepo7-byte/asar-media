@@ -28,6 +28,7 @@ display:flex;flex-direction:column;padding:72px 80px 64px}}
 <div class="main">{cuerpo}</div><div class="foot"><span>Somos ASAR</span><span>Automatización contable</span></div></body></html>"""
 
 def slide(s, n, total):
+    """Las diapositivas se alternan: blanca, morada, blanca... La portada es blanca y el cierre siempre morado."""
     t = s.get("tipo", "punto")
     if t == "portada":
         c = f"""<div style="font-size:92px;font-weight:600;line-height:1.04;letter-spacing:-.02em">{e(s.get('titulo'))}</div>
@@ -39,11 +40,17 @@ def slide(s, n, total):
 <div style="font-size:38px;margin-top:34px;line-height:1.4;opacity:.92">{e(s.get('texto'))}</div>
 <div style="margin-top:60px"><span style="border:3px solid #fff;font-size:32px;font-weight:600;padding:18px 30px;border-radius:12px">{e(s.get('cta') or 'Escríbenos por DM')}</span></div>"""
         return marco(c, n, total, fondo=PRI, tinta="#FFFFFF", borde="#FFFFFF", mut="rgba(255,255,255,.8)")
+    osc = n % 2 == 0
+    num_c, txt_c = ("#DDD6FE", "rgba(255,255,255,.92)") if osc else (PRI, "#2E2B38")
     dato = s.get("dato")
-    c = f"""<div style="font-size:120px;font-weight:600;color:{PRI};line-height:1">{e(s.get('num'))}</div>
+    dbox = (f'background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);color:#FFFFFF' if osc
+            else f'background:{SOFT};border:2px solid {BD};color:{INK}')
+    c = f"""<div style="font-size:120px;font-weight:600;color:{num_c};line-height:1">{e(s.get('num'))}</div>
 <div style="font-size:64px;font-weight:600;line-height:1.08;margin-top:28px;letter-spacing:-.01em">{e(s.get('titulo'))}</div>
-<div style="font-size:38px;line-height:1.42;margin-top:30px;color:#2E2B38">{e(s.get('texto'))}</div>
-{f'<div style="margin-top:40px;background:{SOFT};border:2px solid {BD};border-radius:16px;padding:26px 30px;font-size:32px;line-height:1.4;color:{INK}">{e(dato)}</div>' if dato else ''}"""
+<div style="font-size:38px;line-height:1.42;margin-top:30px;color:{txt_c}">{e(s.get('texto'))}</div>
+{f'<div style="margin-top:40px;{dbox};border-radius:16px;padding:26px 30px;font-size:32px;line-height:1.4">{e(dato)}</div>' if dato else ''}"""
+    if osc:
+        return marco(c, n, total, fondo=PRI, tinta="#FFFFFF", borde="#FFFFFF", mut="rgba(255,255,255,.8)")
     return marco(c, n, total)
 
 async def main(src, out):
