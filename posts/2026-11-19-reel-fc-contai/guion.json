@@ -1,0 +1,40 @@
+{
+ "segundos": 3.2,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "titulo": "Causa tus compras en CONTAI sin digitar",
+   "sub": "FC CONTAI, un desarrollo propio, en 20 segundos."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "El problema",
+   "texto": "Causar cada factura de compra a mano en CONTAI, una por una, toma tiempo y abre la puerta a errores."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "El punto de partida",
+   "texto": "La matriz de facturas electrónicas de la DIAN que arma ARCHIVO MATRIX a partir de los XML."
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "Lo que hace",
+   "texto": "FC CONTAI toma esa matriz y genera el plano de importación para causar las compras en CONTAI."
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "El resultado",
+   "texto": "Importas el plano en CONTAI. Tú revisas y validas; la herramienta hace la digitación."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "¿Todavía causas tus compras a mano?",
+   "texto": "Cuéntanos cómo lo haces hoy y te mostramos cómo lo trabajamos.",
+   "cta": "Escríbenos por DM"
+  }
+ ]
+}
