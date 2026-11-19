@@ -6,7 +6,8 @@ post.json = {"slides": [
   {"tipo": "punto", "num": "01", "titulo": "...", "texto": "...", "dato": "(opcional)"},
   {"tipo": "cierre", "titulo": "...", "texto": "...", "cta": "Escríbenos por DM"}
 ]}
-Genera 1.jpg, 2.jpg, ... en carpeta_salida. Requiere playwright y Chrome.
+Genera 1.jpg, 2.jpg, ..., carrusel.pdf (todas las diapositivas en un PDF) y diapositivas.json en carpeta_salida.
+Requiere playwright, Chrome y Pillow.
 """
 import asyncio, html, json, os, sys
 from playwright.async_api import async_playwright
@@ -57,6 +58,10 @@ async def main(src, out):
             await pg.wait_for_timeout(250)
             await pg.screenshot(path=os.path.join(out, f"{i}.jpg"), type="jpeg", quality=90)
         await b.close()
+    from PIL import Image
+    ims = [Image.open(os.path.join(out, f"{i}.jpg")).convert("RGB") for i in range(1, len(sl) + 1)]
+    ims[0].save(os.path.join(out, "carrusel.pdf"), save_all=True, append_images=ims[1:], resolution=150)
+    json.dump(data, open(os.path.join(out, "diapositivas.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("\n".join(os.path.join(out, f"{i}.jpg") for i in range(1, len(sl) + 1)))
 
 if __name__ == "__main__":
