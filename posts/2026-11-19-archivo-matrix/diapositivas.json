@@ -1,0 +1,41 @@
+{
+ "slides": [
+  {
+   "tipo": "portada",
+   "titulo": "Deja de digitar facturas electrónicas a mano",
+   "sub": "Así automatizamos la lectura de los XML de la DIAN con ARCHIVO MATRIX, un desarrollo propio."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "El problema",
+   "texto": "Cada factura electrónica llega con su XML. Pasar sus datos a Excel, una por una, es lento y es donde se cuelan errores de digitación.",
+   "dato": "Más tiempo copiando, menos tiempo analizando."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "Cómo funciona",
+   "texto": "Cargas los XML de las facturas electrónicas. La herramienta los lee y organiza los datos de cada factura en una sola matriz, fila por fila."
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "Antes",
+   "texto": "Abrir cada archivo, buscar los valores y copiarlos a mano en la hoja de trabajo, con el riesgo de saltarse una factura o cambiar un número."
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "Después",
+   "texto": "Una matriz ordenada que sale de los mismos XML. Tú revisas y validas; la máquina hace la transcripción.",
+   "dato": "Esa matriz es la base de nuestro causador de compras para CONTAI."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "¿Te pasa lo mismo cada mes?",
+   "texto": "Cuéntanos cómo recibes hoy tus facturas de compra y te mostramos cómo lo trabajamos.",
+   "cta": "Escríbenos por DM"
+  }
+ ]
+}

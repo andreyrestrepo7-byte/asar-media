@@ -1,0 +1,47 @@
+{
+ "slides": [
+  {
+   "tipo": "portada",
+   "titulo": "Retención de noviembre: tus fechas en diciembre",
+   "sub": "Se declara y paga entre el 10 y el 23 de diciembre de 2026, según el último dígito del NIT."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "¿Qué se declara?",
+   "texto": "Las retenciones en la fuente practicadas durante noviembre de 2026, en el formulario 350. El plazo depende del último dígito del NIT, sin dígito de verificación."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "NIT terminado en 1 a 5",
+   "texto": "Estas son las fechas del calendario tributario 2026:",
+   "dato": "1 → jueves 10 dic · 2 → viernes 11 dic · 3 → lunes 14 dic · 4 → martes 15 dic · 5 → miércoles 16 dic"
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "NIT terminado en 6 a 0",
+   "texto": "Y la segunda mitad del mes:",
+   "dato": "6 → jueves 17 dic · 7 → viernes 18 dic · 8 → lunes 21 dic · 9 → martes 22 dic · 0 → miércoles 23 dic"
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "Declarar no basta: hay que pagar",
+   "texto": "Según el artículo 580-1 del Estatuto Tributario, la declaración de retención presentada sin pago total puede quedar sin efecto legal. Programa el pago junto con la presentación."
+  },
+  {
+   "tipo": "punto",
+   "num": "05",
+   "titulo": "¿Y diciembre?",
+   "texto": "Las retenciones practicadas en diciembre se declaran en enero de 2027. Antes de pagar, confirma tu fecha en el calendario oficial de la DIAN."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "Guarda este post para diciembre",
+   "texto": "Y compártelo con quien lleva la contabilidad de tu empresa.",
+   "cta": "¿Dudas? Comenta o escríbenos"
+  }
+ ]
+}
