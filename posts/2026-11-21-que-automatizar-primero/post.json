@@ -1,0 +1,8 @@
+{"slides": [
+{"tipo": "portada", "titulo": "¿Qué proceso contable automatizar primero?", "sub": "Las 4 preguntas que nos hacemos antes de construir una herramienta."},
+{"tipo": "punto", "num": "01", "titulo": "¿Se repite y sigue reglas?", "texto": "Si lo haces cada mes con los mismos pasos y cabe en un «si pasa esto, haz aquello», es buen candidato. Si depende de tu criterio, que la herramienta prepare y tú decidas."},
+{"tipo": "punto", "num": "02", "titulo": "¿Los datos ya llegan en digital?", "texto": "XML de la DIAN, exportaciones de SIIGO o CONTAI, extractos en Excel: si la información ya está en un archivo, el camino es mucho más corto.", "dato": "Así nació ARCHIVO MATRIX: los XML ya existían, solo había que leerlos."},
+{"tipo": "punto", "num": "03", "titulo": "¿Puedes comprobar el resultado?", "texto": "Antes de confiar en una herramienta, pruébala con un caso que ya hiciste a mano. Si cuadra, sigue; si no, ajusta antes de usarla en serio."},
+{"tipo": "punto", "num": "04", "titulo": "¿Qué datos vas a tocar?", "texto": "Si el proceso usa datos personales de terceros, define quién los ve y dónde quedan guardados. En Colombia, la Ley 1581 de 2012 regula su tratamiento."},
+{"tipo": "cierre", "titulo": "¿Cuál sería tu primer proceso?", "texto": "Cuéntanos qué tarea repites cada mes y te decimos si vale la pena automatizarla.", "cta": "Comenta o escríbenos por DM"}
+]}
