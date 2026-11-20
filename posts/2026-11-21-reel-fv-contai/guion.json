@@ -1,0 +1,60 @@
+{
+ "voz": "alex",
+ "musica": true,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "texto": "¿Facturas en SIIGO y contabilidad en CONTAI?",
+   "resaltar": [
+    "SIIGO",
+    "CONTAI?"
+   ],
+   "sub": "No digites cada venta dos veces",
+   "voz": "¿Facturas en Siigo y llevas la contabilidad en Contai? No digites cada venta dos veces."
+  },
+  {
+   "tipo": "proceso",
+   "titulo": "Así funciona FV CONTAI",
+   "pasos": [
+    "Exportas ventas de SIIGO",
+    "FV CONTAI las convierte",
+    "Plano listo para CONTAI"
+   ],
+   "voz": "Exportas tus facturas de venta desde Siigo, efe ve Contai las convierte y te entrega el plano."
+  },
+  {
+   "tipo": "pantalla",
+   "titulo": "Tus ventas, fila por fila",
+   "app": "FV CONTAI · Plano de ventas",
+   "filas": 6,
+   "listo": "Plano listo para CONTAI",
+   "voz": "Cada venta queda como movimiento contable, lista para importar en Contai."
+  },
+  {
+   "tipo": "lista",
+   "titulo": "Antes de usarlo en serio",
+   "icono": "check",
+   "items": [
+    "Prueba con un mes cerrado",
+    "Compara contra tu auxiliar",
+    "Revisa terceros y cuentas"
+   ],
+   "voz": "Nuestro consejo: pruébalo primero con un mes que ya cerraste y compáralo con tu auxiliar."
+  },
+  {
+   "tipo": "frase",
+   "lineas": [
+    "Lo digitas una vez.",
+    "CONTAI lo recibe listo."
+   ],
+   "grande": true,
+   "voz": "Lo digitas una sola vez en Siigo y Contai lo recibe listo para revisar."
+  },
+  {
+   "tipo": "cierre",
+   "texto": "Somos ASAR",
+   "cta": "Escríbenos por DM",
+   "voz": "¿Trabajas con Siigo y Contai? Escríbenos por mensaje directo. Somos Asar."
+  }
+ ]
+}
