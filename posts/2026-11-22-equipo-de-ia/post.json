@@ -1,0 +1,8 @@
+{"slides": [
+{"tipo": "portada", "titulo": "Este carrusel lo armó un equipo de IA", "sub": "Y nada se publica sin que una persona lo revise. Así trabajamos por dentro."},
+{"tipo": "punto", "num": "01", "titulo": "Cada agente tiene un rol", "texto": "Una agente redacta los textos, otro diseña las diapositivas, otros arman los reels y uno evalúa ideas de nuevas herramientas. Todos trabajan con Claude."},
+{"tipo": "punto", "num": "02", "titulo": "Un tablero en común", "texto": "Ideas, encargos y posts viven en Notion. Cada borrador queda con su estado: pendiente, aprobado o con cambios pedidos.", "dato": "Así nadie trabaja a ciegas ni repite el tema de otro."},
+{"tipo": "punto", "num": "03", "titulo": "Una persona aprueba", "texto": "Ningún post sale sin que nuestro CEO lo lea. Si algo no le convence, deja un comentario y el equipo lo rehace.", "dato": "La IA acelera; el criterio y la responsabilidad siguen siendo nuestros."},
+{"tipo": "punto", "num": "04", "titulo": "Reglas que no se negocian", "texto": "No inventamos cifras ni normas: todo dato tributario se verifica en fuentes oficiales. Y nunca usamos datos de clientes."},
+{"tipo": "cierre", "titulo": "¿Qué le delegarías a un agente?", "texto": "Cuéntanos qué tarea de tu oficina le darías primero a la IA.", "cta": "Comenta o escríbenos por DM"}
+]}
