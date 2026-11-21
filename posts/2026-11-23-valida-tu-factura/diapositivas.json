@@ -1,0 +1,42 @@
+{
+ "slides": [
+  {
+   "tipo": "portada",
+   "titulo": "Un PDF con QR no prueba que tu factura sea válida",
+   "sub": "Así compruebas en la DIAN una factura de compra antes de registrarla."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "La apariencia no basta",
+   "texto": "Logo, código QR y todos los datos no garantizan nada. La DIAN lo recordó en octubre de 2026: un PDF no asegura que la factura haya sido validada.",
+   "dato": "La factura electrónica es un XML; el PDF es solo su representación gráfica."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "Ubica el CUFE y consúltalo",
+   "texto": "El CUFE es el código único de cada factura y va en la representación gráfica. Escanea el QR o ingresa el CUFE en la consulta de documentos de la DIAN.",
+   "dato": "catalogo-vpfe.dian.gov.co/User/SearchDocument"
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "Compara los datos",
+   "texto": "Revisa que vendedor, adquirente, valores e impuestos coincidan con la compra que de verdad hiciste."
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "Si no aparece, no la registres",
+   "texto": "Pide aclaración al emisor antes de causarla. La validación es necesaria para soportar costos, deducciones e impuestos descontables.",
+   "dato": "Primero se valida, después se causa."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "¿Validas tus facturas de compra?",
+   "texto": "Cuéntanos cómo lo hacen hoy en tu oficina: ¿una por una o todas al cierre?",
+   "cta": "Comenta o escríbenos por DM"
+  }
+ ]
+}
