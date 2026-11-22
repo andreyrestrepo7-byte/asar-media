@@ -1,0 +1,8 @@
+{"slides": [
+{"tipo": "portada", "titulo": "Causa tus compras en CONTAI sin digitarlas una por una", "sub": "Así funciona FC CONTAI, un desarrollo propio que convierte tus facturas en un plano de importación."},
+{"tipo": "punto", "num": "01", "titulo": "Antes: una por una", "texto": "Abrir cada factura de compra y digitar en CONTAI tercero, cuenta, valores e impuestos. Al cierre de mes eso se vuelve horas de digitación.", "dato": "Y cada dato digitado es una oportunidad de error."},
+{"tipo": "punto", "num": "02", "titulo": "Cómo funciona", "texto": "Parte de la matriz que ARCHIVO MATRIX arma con los XML de la DIAN. FC CONTAI la toma y genera el plano de importación de compras para CONTAI.", "dato": "XML de la DIAN → matriz de facturas → plano para CONTAI"},
+{"tipo": "punto", "num": "03", "titulo": "Después: importar y revisar", "texto": "Importas el plano en CONTAI, revisas y validas. La herramienta hace la digitación; el criterio contable sigue siendo tuyo.", "dato": "Consejo: pruébalo primero con un mes que ya cerraste y compáralo con tu auxiliar."},
+{"tipo": "punto", "num": "04", "titulo": "Primero valida, después causa", "texto": "Antes de armar el plano, confirma en la DIAN que cada factura de compra es válida. Lo que no aparezca allí no debería entrar a tu contabilidad."},
+{"tipo": "cierre", "titulo": "¿Cómo causas hoy tus compras?", "texto": "Cuéntanos si lo haces a mano o con plano y te mostramos cómo lo trabajamos.", "cta": "Comenta o escríbenos por DM"}
+]}
