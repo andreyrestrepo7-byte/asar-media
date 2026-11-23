@@ -1,0 +1,9 @@
+{"slides": [
+{"tipo": "portada", "titulo": "Depura tus terceros antes de la exógena", "sub": "La exógena del año gravable 2026 se reporta en 2027. Estas 5 revisiones las puedes adelantar desde ya."},
+{"tipo": "punto", "num": "01", "titulo": "Identificación completa", "texto": "Cada tercero necesita tipo de documento, número de identificación y dígito de verificación. Algunos programas exportan el NIT sin DV: complétalo.", "dato": "Un filtro de celdas vacías te muestra los faltantes en segundos."},
+{"tipo": "punto", "num": "02", "titulo": "Nombres separados", "texto": "En la exógena, las personas naturales van con primer apellido, segundo apellido, primer nombre y otros nombres. Si tu software los guarda juntos, sepáralos.", "dato": "Una fórmula los separa; los compuestos («De la Torre») van a revisión manual."},
+{"tipo": "punto", "num": "03", "titulo": "Municipio con código DANE", "texto": "Departamento y municipio se reportan con su código DANE numérico, con ceros a la izquierda. Crúzalos con la tabla DIVIPOLA en vez de digitarlos.", "dato": "Medellín → 05 / 05001. Si la columna no es texto, Excel borra el cero."},
+{"tipo": "punto", "num": "04", "titulo": "Direcciones y duplicados", "texto": "Busca direcciones vacías o con «No aplica» y terceros repetidos con el mismo NIT. Unificarlos ahora evita que un mismo tercero quede partido en dos."},
+{"tipo": "punto", "num": "05", "titulo": "Deja rastro de cada cambio", "texto": "Agrega una columna con lo que corregiste y por qué. Si después hay una pregunta, sabrás de dónde salió cada dato.", "dato": "Automatiza la búsqueda de errores; la corrección final la decides tú."},
+{"tipo": "cierre", "titulo": "¿Ya empezaste a depurar?", "texto": "Cuéntanos qué error encuentras más en tu base de terceros.", "cta": "Comenta o escríbenos por DM"}
+]}
