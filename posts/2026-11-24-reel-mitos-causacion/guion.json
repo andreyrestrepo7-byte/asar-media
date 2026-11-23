@@ -1,0 +1,61 @@
+{
+ "voz": "alex",
+ "musica": true,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "texto": "3 mitos de automatizar tu causación",
+   "resaltar": [
+    "3",
+    "mitos"
+   ],
+   "sub": "Y lo que de verdad pasa",
+   "voz": "Tres mitos sobre automatizar la causación de compras. Y lo que de verdad pasa."
+  },
+  {
+   "tipo": "lista",
+   "titulo": "Lo que escuchamos",
+   "icono": "x",
+   "items": [
+    "«Reemplaza al contador»",
+    "«El PDF basta para causar»",
+    "«Exige otro software»"
+   ],
+   "voz": "Que reemplaza al contador, que el pe de efe basta para causar y que exige otro software."
+  },
+  {
+   "tipo": "frase",
+   "lineas": [
+    "Realidad 1:",
+    "digita por ti,",
+    "no decide por ti."
+   ],
+   "grande": true,
+   "voz": "Realidad uno: la herramienta digita por ti, pero las decisiones contables siguen siendo tuyas."
+  },
+  {
+   "tipo": "proceso",
+   "titulo": "Realidad 2: valida primero",
+   "pasos": [
+    "Consulta el CUFE en la DIAN",
+    "Compara vendedor y valores",
+    "Solo entonces causa"
+   ],
+   "voz": "Realidad dos: el pe de efe no basta. Consulta el cufe en la Dian antes de causar."
+  },
+  {
+   "tipo": "pantalla",
+   "titulo": "Realidad 3: sigues en CONTAI",
+   "app": "FC CONTAI · Plano de compras",
+   "filas": 6,
+   "listo": "Plano listo para importar",
+   "voz": "Realidad tres: no cambias de software. Efe ce Contai arma el plano y lo importas en tu Contai."
+  },
+  {
+   "tipo": "cierre",
+   "texto": "Somos ASAR",
+   "cta": "Escríbenos por DM",
+   "voz": "Automatizar no es dejar de revisar. Escríbenos por mensaje directo. Somos Asar."
+  }
+ ]
+}
