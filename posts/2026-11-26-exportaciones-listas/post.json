@@ -1,0 +1,9 @@
+{"slides": [
+{"tipo": "portada", "titulo": "Ordena tus exportaciones antes de automatizar", "sub": "5 hábitos para que un reporte de SIIGO o CONTAI se pueda procesar cada mes sin retoques."},
+{"tipo": "punto", "num": "01", "titulo": "Siempre el mismo reporte", "texto": "Exporta cada mes con el mismo informe, los mismos filtros y las mismas columnas. Si cambia el orden, la fórmula o la herramienta que lo lee se rompe.", "dato": "Anota qué reporte y qué filtros usas. Tu yo del próximo mes te lo agradecerá."},
+{"tipo": "punto", "num": "02", "titulo": "El original no se toca", "texto": "Guarda la exportación tal como salió y trabaja sobre una copia. Si algo no cuadra, vuelves al original y repites el proceso desde cero.", "dato": "El archivo original es tu rastro de lo que dijo el sistema."},
+{"tipo": "punto", "num": "03", "titulo": "Una fila por movimiento", "texto": "Títulos de varias filas, subtotales y totales sirven para leer, no para procesar. Una tabla plana, con un solo encabezado, es lo que toda automatización necesita."},
+{"tipo": "punto", "num": "04", "titulo": "Códigos como texto", "texto": "NIT, códigos de cuenta y de municipio van en formato texto. Si Excel los toma como número, borra los ceros a la izquierda y el cruce falla.", "dato": "Al importar un CSV, marca esas columnas como Texto en vez de abrirlo con doble clic."},
+{"tipo": "punto", "num": "05", "titulo": "Ojo con las fechas", "texto": "Un programa puede exportar día/mes/año y otro mes/día/año. Si los mezclas, el 03/04 puede quedar como 3 de abril o como 4 de marzo.", "dato": "Revisa una fecha con día mayor a 12: ahí se nota el formato."},
+{"tipo": "cierre", "titulo": "¿Qué te desordena los archivos?", "texto": "Ceros perdidos, fechas cruzadas o columnas que cambian: cuéntanos cuál te pasa más.", "cta": "Comenta o escríbenos por DM"}
+]}
