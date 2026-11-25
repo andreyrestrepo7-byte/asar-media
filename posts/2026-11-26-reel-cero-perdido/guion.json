@@ -1,0 +1,64 @@
+{
+ "voz": "alex",
+ "musica": true,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "texto": "Medellín no es 5001",
+   "resaltar": [
+    "5001"
+   ],
+   "sub": "Es 05001. Excel se comió el cero.",
+   "voz": "Medellín no es cinco mil uno. Es cero cinco cero cero uno. Excel se comió el cero."
+  },
+  {
+   "tipo": "antes_despues",
+   "antes": "Doble clic: 5001",
+   "despues": "Importado: 05001",
+   "voz": "Abres el ce ese ve con doble clic y Excel borra el cero."
+  },
+  {
+   "tipo": "lista",
+   "titulo": "Dónde te pega",
+   "icono": "x",
+   "items": [
+    "BUSCARV que no encuentra",
+    "Terceros sin municipio",
+    "Exógena por corregir"
+   ],
+   "voz": "Resultado: buscarv que no encuentra, terceros sin municipio y exógena por corregir."
+  },
+  {
+   "tipo": "frase",
+   "lineas": [
+    "El dato está bien.",
+    "La columna no."
+   ],
+   "grande": true,
+   "voz": "El dato está bien. Lo que falla es el formato de la columna."
+  },
+  {
+   "tipo": "proceso",
+   "titulo": "Impórtalo así",
+   "pasos": [
+    "Datos › Desde texto/CSV",
+    "Transformar datos",
+    "Columna tipo Texto"
+   ],
+   "voz": "Impórtalo: datos, desde texto, transformar datos y esa columna a tipo texto."
+  },
+  {
+   "tipo": "dato",
+   "numero": "5",
+   "sufijo": "dígitos",
+   "texto": "tiene todo código de municipio DIVIPOLA",
+   "voz": "Todo código de municipio Divipola tiene cinco dígitos. Si ves cuatro, perdiste un cero."
+  },
+  {
+   "tipo": "cierre",
+   "texto": "Somos ASAR",
+   "cta": "Escríbenos por DM",
+   "voz": "¿Te ha pasado? Escríbenos por mensaje directo. Somos Asar."
+  }
+ ]
+}
