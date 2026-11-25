@@ -1,0 +1,49 @@
+{
+ "slides": [
+  {
+   "tipo": "portada",
+   "titulo": "Facturas en SIIGO: no vuelvas a digitar en CONTAI",
+   "sub": "Así funciona FV CONTAI, un desarrollo propio que convierte tus ventas de SIIGO en un plano de importación."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "El problema: digitar dos veces",
+   "texto": "Si facturas en SIIGO y llevas la contabilidad en CONTAI, cada venta se registra dos veces. Al cierre de mes eso se vuelve horas de digitación.",
+   "dato": "La misma venta en dos sistemas son dos oportunidades de error."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "Cómo funciona",
+   "texto": "Exportas desde SIIGO las facturas de venta del periodo. FV CONTAI las lee y arma el plano de movimientos para importarlo en CONTAI.",
+   "dato": "Ventas de SIIGO → FV CONTAI → plano para CONTAI"
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "Antes y después",
+   "texto": "Antes: pasar cada factura de venta a CONTAI, una por una. Después: importar un solo plano, revisarlo y validarlo. La digitación la hace la herramienta."
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "Cuadra antes de importar",
+   "texto": "Compara el total del plano con el reporte de ventas de SIIGO del mismo periodo. Si no coincide, busca la factura que falta o sobra antes de importar.",
+   "dato": "Consejo: pruébalo primero con un mes que ya cerraste."
+  },
+  {
+   "tipo": "punto",
+   "num": "05",
+   "titulo": "El criterio sigue siendo tuyo",
+   "texto": "Revisa terceros, cuentas e impuestos del plano. La herramienta transcribe lo que viene de SIIGO: si el origen trae un error, el plano también.",
+   "dato": "Automatizar no es dejar de revisar."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "¿Facturas en un sistema y contabilizas en otro?",
+   "texto": "Cuéntanos qué combinación usas y te mostramos cómo lo trabajamos.",
+   "cta": "Comenta o escríbenos por DM"
+  }
+ ]
+}
