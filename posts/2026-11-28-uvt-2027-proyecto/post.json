@@ -1,0 +1,9 @@
+{"slides": [
+{"tipo": "portada", "titulo": "UVT 2027: la DIAN propone $55.673", "sub": "Es un proyecto de resolución. Esto es lo que cambiaría en 2027 y lo que no."},
+{"tipo": "punto", "num": "01", "titulo": "De $52.374 a $55.673", "texto": "La UVT se reajusta cada año con la variación del IPC de ingresos medios (art. 868 del Estatuto Tributario). Para 2027 subiría 6,30 %: $3.299 más por UVT.", "dato": "La DIAN publicó el proyecto el 25 de noviembre de 2026."},
+{"tipo": "punto", "num": "02", "titulo": "Todavía no es definitiva", "texto": "El proyecto recibe comentarios hasta el 4 de diciembre de 2026. Hasta que salga la resolución definitiva, el valor puede cambiar.", "dato": "Antes de actualizar tus tablas, confirma el valor en la resolución final."},
+{"tipo": "punto", "num": "03", "titulo": "Así se moverían dos topes", "texto": "Sanción mínima (10 UVT): de $523.740 a $556.730. Tope de 3.500 UVT para no ser responsable de IVA: de $183.309.000 a $194.855.500.", "dato": "Aplicaría a las obligaciones del año gravable 2027."},
+{"tipo": "punto", "num": "04", "titulo": "Tu renta de 2026 no cambia", "texto": "Las declaraciones de renta que presentes en 2027 corresponden al año gravable 2026: se liquidan con la UVT de 2026, es decir, $52.374."},
+{"tipo": "punto", "num": "05", "titulo": "Parametriza la UVT", "texto": "Si tus plantillas tienen $523.740 escrito a mano, cada enero toca buscarlo celda por celda. Deja la UVT en una sola celda y calcula todo a partir de ella.", "dato": "Cambias un valor y todos los topes quedan al día."},
+{"tipo": "cierre", "titulo": "¿Ya tienes tu UVT en una celda?", "texto": "Cuéntanos qué topes en UVT usas más en tu día a día.", "cta": "Comenta o escríbenos por DM"}
+]}
