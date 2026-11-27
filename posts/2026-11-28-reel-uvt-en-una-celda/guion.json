@@ -1,0 +1,65 @@
+{
+ "voz": "alex",
+ "musica": true,
+ "escenas": [
+  {
+   "tipo": "gancho",
+   "texto": "¿Tu plantilla sigue en 2026?",
+   "resaltar": [
+    "2026?"
+   ],
+   "sub": "La UVT cambia cada año. Tus fórmulas, no.",
+   "voz": "En enero cambia la u ve te. ¿Tu plantilla se va a enterar?"
+  },
+  {
+   "tipo": "antes_despues",
+   "antes": "$523.740 escrito a mano",
+   "despues": "=10*UVT en la fórmula",
+   "voz": "Si escribiste el valor a mano, cada enero toca buscarlo celda por celda."
+  },
+  {
+   "tipo": "lista",
+   "titulo": "Lo que se queda viejo",
+   "icono": "x",
+   "items": [
+    "Sanción mínima (10 UVT)",
+    "Tope de IVA (3.500 UVT)",
+    "Topes para declarar renta"
+   ],
+   "voz": "Sanción mínima, tope de iva, topes de renta: todo se mide en u ve te."
+  },
+  {
+   "tipo": "frase",
+   "lineas": [
+    "No escribas pesos.",
+    "Escribe UVT."
+   ],
+   "grande": true,
+   "voz": "Por eso, en tus fórmulas no escribas pesos. Escribe u ve te."
+  },
+  {
+   "tipo": "proceso",
+   "titulo": "Hazlo una sola vez",
+   "pasos": [
+    "UVT en una celda",
+    "Nómbrala «UVT»",
+    "Topes: =10*UVT"
+   ],
+   "voz": "Pon la u ve te en una celda, ponle nombre y multiplica cada tope por ella."
+  },
+  {
+   "tipo": "pantalla",
+   "titulo": "Cambias una celda",
+   "app": "Topes en UVT",
+   "filas": 5,
+   "listo": "Todos los topes al día",
+   "voz": "Sale la u ve te definitiva de dos mil veintisiete y cambias una sola celda."
+  },
+  {
+   "tipo": "cierre",
+   "texto": "Somos ASAR",
+   "cta": "Escríbenos por DM",
+   "voz": "¿Quieres tus plantillas así? Escríbenos por mensaje directo. Somos Asar."
+  }
+ ]
+}
