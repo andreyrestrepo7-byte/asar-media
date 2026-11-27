@@ -1,0 +1,48 @@
+{
+ "slides": [
+  {
+   "tipo": "portada",
+   "titulo": "Antes de pasarle un Excel a la IA",
+   "sub": "5 cuidados para automatizar sin exponer los datos de tus clientes."
+  },
+  {
+   "tipo": "punto",
+   "num": "01",
+   "titulo": "Comparte la estructura",
+   "texto": "Para entender un reporte de SIIGO o CONTAI, a la IA le bastan los encabezados, el formato de las fechas y el tipo de cada columna. Los nombres y valores reales sobran.",
+   "dato": "Así construimos nuestras herramientas."
+  },
+  {
+   "tipo": "punto",
+   "num": "02",
+   "titulo": "Si necesitas ejemplos, invéntalos",
+   "texto": "Tres o cuatro filas con terceros y valores ficticios, pero con el mismo formato del original, sirven igual para probar una fórmula o un plano de importación."
+  },
+  {
+   "tipo": "punto",
+   "num": "03",
+   "titulo": "Quita lo que identifica",
+   "texto": "Antes de compartir un archivo, borra o reemplaza nombres, cédulas, NIT, direcciones, teléfonos y correos.",
+   "dato": "Ley 1581 de 2012, art. 3: dato personal es cualquier información que pueda asociarse a una persona natural."
+  },
+  {
+   "tipo": "punto",
+   "num": "04",
+   "titulo": "Claves y tokens, nunca",
+   "texto": "Contraseñas, tokens de la DIAN y accesos a tu software no se pegan en un chat. Si una herramienta te los pide, pregunta para qué y dónde quedan guardados."
+  },
+  {
+   "tipo": "punto",
+   "num": "05",
+   "titulo": "La revisión final es tuya",
+   "texto": "La IA prepara; tú validas. Compara el resultado con el original antes de importarlo o enviarlo, y no guardes copias que no necesitas.",
+   "dato": "La Ley 1581 obliga a quien trata datos personales a garantizar su reserva (art. 4)."
+  },
+  {
+   "tipo": "cierre",
+   "titulo": "¿Cómo cuidas los datos de tus clientes?",
+   "texto": "Cuéntanos qué revisas antes de usar IA con un archivo.",
+   "cta": "Comenta o escríbenos por DM"
+  }
+ ]
+}
